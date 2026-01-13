@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api";
+import adminApi from "../services/api";
+
 import "./Login.css";
 
 export default function Login() {
@@ -11,7 +12,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await API.post("/auth/login", {
+     const res = await adminApi.post("/auth/login", {
         email,
         password,
       });
