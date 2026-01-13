@@ -29,7 +29,7 @@ const Home = () => {
       <TestimonialsSection />
       <DonateCTA />
 
-      <h1>Mannat Foundation</h1>
+      
 
     </>
 
