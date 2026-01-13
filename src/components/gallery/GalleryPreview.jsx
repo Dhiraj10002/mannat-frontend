@@ -8,7 +8,7 @@ const GalleryPreview = () => {
 
   useEffect(() => {
     API
-  .get("/api/gallery")
+  .get("/gallery")
   .then((res) => setItems(res.data))
   .catch(console.error);
 

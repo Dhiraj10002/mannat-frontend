@@ -26,10 +26,10 @@ export default function Gallery() {
     formData.append("file", file);
 
     setLoading(true);
-    await API.post("/gallery/upload", formData);
-    setFile(null);
-    setLoading(false);
-    fetchGallery();
+     const res = await adminApi.post("/auth/login", {
+        email,
+        password,
+      });
   };
 
   const handleDelete = async (id) => {

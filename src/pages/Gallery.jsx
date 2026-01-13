@@ -34,7 +34,7 @@ const Gallery = () => {
 
   const fetchGallery = async () => {
     try {
-       const res = await API.get("/api/gallery");
+       const res = await API.get("/gallery");
         setGallery(res.data);
     } catch (err) {
       console.error("Failed to load gallery");

@@ -23,7 +23,7 @@ const JoinUs = () => {
     setLoading(true);
 
     try {
-          await API.post("/api/join-us", {
+          await API.post("/join-us", {
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
