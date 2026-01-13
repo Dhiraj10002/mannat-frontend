@@ -1,0 +1,45 @@
+.dashboard {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  padding: 24px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.stat-card p {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.blue {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.green {
+  background: linear-gradient(135deg, #16a34a, #166534);
+}
+
+.purple {
+  background: linear-gradient(135deg, #7c3aed, #4c1d95);
+}
