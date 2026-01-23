@@ -9,7 +9,7 @@ export default function Gallery() {
   const [loading, setLoading] = useState(false);
 
   const fetchGallery = async () => {
-    const res = await adminApi.get("/join-us");
+    const res = await adminApi.get("/gallery");
 
     setGallery(res.data);
   };
