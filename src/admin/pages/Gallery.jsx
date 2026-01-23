@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import API from "../../services/api";          // public fetch
+import adminApi from "../services/api";        // admin actions
 import "./Gallery.css";
 
 export default function Gallery() {
@@ -13,36 +14,52 @@ export default function Gallery() {
   };
 
   useEffect(() => {
-    (async () => {
-      const res = await API.get("/gallery");
-      setGallery(res.data);
-    })();
+    fetchGallery();
   }, []);
 
+  // ✅ FIXED (ONLY ONE FUNCTION)
   const handleUpload = async () => {
     if (!file) return alert("Please select a file");
 
     const formData = new FormData();
     formData.append("file", file);
 
-    setLoading(true);
-     const res = await adminApi.post("/auth/login", {
-        email,
-        password,
+    try {
+      setLoading(true);
+
+      await adminApi.post("/admin/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
+
+      alert("Upload successful");
+      setFile(null);
+      fetchGallery();
+    } catch (error) {
+      console.error(error);
+      alert("Upload failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this media?")) return;
-    await API.delete(`/gallery/${id}`);
-    fetchGallery();
+
+    try {
+      await adminApi.delete(`/admin/gallery/${id}`);
+      fetchGallery();
+    } catch (err) {
+      console.error(err);
+      alert("Delete failed");
+    }
   };
 
   return (
     <div className="gallery-page">
       <h2 className="page-title">Gallery Management</h2>
 
-      {/* Upload Box */}
       <div className="upload-box">
         <input
           type="file"
@@ -53,7 +70,6 @@ export default function Gallery() {
         </button>
       </div>
 
-      {/* Gallery Grid */}
       <div className="gallery-grid">
         {gallery.map((item) => (
           <div className="gallery-card" key={item._id}>
