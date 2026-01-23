@@ -27,7 +27,7 @@ export default function Gallery() {
     try {
       setLoading(true);
 
-      await adminApi.post("/admin/upload", formData, {
+      await adminApi.post("/gallery/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -48,7 +48,7 @@ export default function Gallery() {
     if (!window.confirm("Delete this media?")) return;
 
     try {
-      await adminApi.delete(`/admin/gallery/${id}`);
+      await adminApi.delete(`/gallery/${id}`);
       fetchGallery();
     } catch (err) {
       console.error(err);
