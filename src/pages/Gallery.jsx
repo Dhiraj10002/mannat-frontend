@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { motion } from "framer-motion";
 import SEO from "../components/common/SEO";
-import API from "../services/api";
+import adminApi from "../services/api";
+
 
 
 
@@ -34,7 +35,8 @@ const Gallery = () => {
 
   const fetchGallery = async () => {
     try {
-       const res = await API.get("/gallery");
+       const res = await adminApi.get("/gallery");
+
         setGallery(res.data);
     } catch (err) {
       console.error("Failed to load gallery");

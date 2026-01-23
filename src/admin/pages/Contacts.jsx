@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import adminApi from "../services/api";
 import ViewModal from "../components/ViewModal";
 import "./Contacts.css";
 
@@ -8,7 +8,8 @@ export default function Contacts() {
   const [selected, setSelected] = useState(null);
 
   const fetchContacts = async () => {
-    const res = await API.get("/contact");
+    const res = await adminApi.get("/contact");
+
     setContacts(res.data);
   };
 

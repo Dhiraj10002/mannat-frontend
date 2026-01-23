@@ -7,17 +7,19 @@ import "./Login.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-   const [showPassword, setShowPassword] = useState(false); // 👈 NEW
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-     const res = await adminApi.post("/auth/login", {
+      const res = await adminApi.post("/auth/login", {
         email,
         password,
       });
 
-      localStorage.setItem("token", res.data.token);
+      // ✅ FIX HERE
+      localStorage.setItem("adminToken", res.data.token);
+
       navigate("/admin");
     } catch (err) {
       alert("Invalid credentials");
@@ -36,22 +38,21 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <div className="password-wrapper">
-            <input
-        type={showPassword ? "text" : "password"}
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        
-        <span
-          className="toggle-password"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? "🙈" : "👁️"}
-        </span>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "🙈" : "👁️"}
+          </span>
         </div>
-        
 
         <button onClick={handleLogin}>Login</button>
       </div>

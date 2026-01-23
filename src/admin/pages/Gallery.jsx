@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../../services/api";          // public fetch
+         // public fetch
 import adminApi from "../services/api";        // admin actions
 import "./Gallery.css";
 
@@ -9,7 +9,8 @@ export default function Gallery() {
   const [loading, setLoading] = useState(false);
 
   const fetchGallery = async () => {
-    const res = await API.get("/gallery");
+    const res = await adminApi.get("/join-us");
+
     setGallery(res.data);
   };
 

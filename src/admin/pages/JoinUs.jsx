@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import adminApi from "../services/api";
 import "./JoinUs.css";
 
 export default function JoinUs() {
@@ -8,7 +8,8 @@ export default function JoinUs() {
 
   const fetchJoinUs = async () => {
     try {
-      const res = await API.get("/join-us");
+      const res = await adminApi.get("/join-us");
+
       setRequests(res.data);
     } catch (err) {
       console.error(err);

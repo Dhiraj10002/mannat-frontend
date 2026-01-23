@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import adminApi from "../services/api";
+
 import "./Dashboard.css";
 import { Helmet } from "react-helmet-async";
 
@@ -16,9 +17,10 @@ export default function Dashboard() {
   const fetchStats = async () => {
     try {
       const [contactsRes, joinRes, galleryRes] = await Promise.all([
-        API.get("/contact"),
-        API.get("/join-us"),
-        API.get("/gallery"),
+      adminApi.get("/contact"),
+      adminApi.get("/join-us"),
+      adminApi.get("/gallery"),
+
       ]);
 
       setStats({
