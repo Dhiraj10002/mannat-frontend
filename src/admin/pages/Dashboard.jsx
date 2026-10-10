@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import {
+  FiHeart,
+  FiMessageSquare,
+  FiUsers,
+  FiImage,
+  FiArrowRight,
+} from "react-icons/fi";
 import adminApi from "../services/api";
 import "./Dashboard.css";
 
@@ -56,7 +63,7 @@ export default function Dashboard() {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <div className="dashboard max-w-7xl mx-auto p-4">
+      <div className="dashboard max-w-7xl mx-auto p-4 sm:p-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
@@ -69,7 +76,7 @@ export default function Dashboard() {
 
           <Link
             to="/admin/donations"
-            className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-5 py-2.5 rounded-xl font-semibold shadow transition self-start md:self-auto"
+            className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md transition self-start md:self-auto"
           >
             <span>💳 View Donations</span>
           </Link>
@@ -77,61 +84,117 @@ export default function Dashboard() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div className="stat-card green bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-              Total Raised
-            </h3>
-            <p className="text-3xl font-black text-green-700 mt-2">
+          {/* Total Raised */}
+          <div className="stat-card card-donations">
+            <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
+            <div className="flex items-center justify-between relative z-10">
+              <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                Total Raised
+              </h3>
+              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+                <FiHeart />
+              </div>
+            </div>
+            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               ₹{stats.totalFunds.toLocaleString("en-IN")}
             </p>
-            <span className="text-[11px] text-green-600 font-semibold mt-1 inline-block">
-              {stats.donationsCount} Online Donors
-            </span>
+            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 text-white text-xs font-semibold backdrop-blur-sm border border-white/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
+                {stats.donationsCount} Online Donors
+              </span>
+              <Link
+                to="/admin/donations"
+                className="text-xs font-semibold text-white/95 hover:text-white flex items-center gap-1 transition group"
+              >
+                <span>View</span>
+                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
 
-          <div className="stat-card blue bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-              Contact Queries
-            </h3>
-            <p className="text-3xl font-black text-blue-600 mt-2">
+          {/* Contact Queries */}
+          <div className="stat-card card-contacts">
+            <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
+            <div className="flex items-center justify-between relative z-10">
+              <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                Contact Queries
+              </h3>
+              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+                <FiMessageSquare />
+              </div>
+            </div>
+            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               {stats.contacts}
             </p>
-            <Link
-              to="/admin/contacts"
-              className="text-[11px] text-blue-500 font-semibold mt-1 inline-block hover:underline"
-            >
-              View messages →
-            </Link>
+            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+              <span className="text-xs font-medium text-white/85">
+                New user inquiries
+              </span>
+              <Link
+                to="/admin/contacts"
+                className="text-xs font-semibold text-white/95 hover:text-white flex items-center gap-1 transition group"
+              >
+                <span>Messages</span>
+                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
 
-          <div className="stat-card green bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-              Join Requests
-            </h3>
-            <p className="text-3xl font-black text-emerald-600 mt-2">
+          {/* Join Requests */}
+          <div className="stat-card card-join">
+            <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
+            <div className="flex items-center justify-between relative z-10">
+              <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                Join Requests
+              </h3>
+              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+                <FiUsers />
+              </div>
+            </div>
+            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               {stats.joinUs}
             </p>
-            <Link
-              to="/admin/join-us"
-              className="text-[11px] text-emerald-500 font-semibold mt-1 inline-block hover:underline"
-            >
-              Review applications →
-            </Link>
+            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+              <span className="text-xs font-medium text-white/85">
+                Volunteer applicants
+              </span>
+              <Link
+                to="/admin/join-us"
+                className="text-xs font-semibold text-white/95 hover:text-white flex items-center gap-1 transition group"
+              >
+                <span>Review</span>
+                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
 
-          <div className="stat-card purple bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-              Gallery Media
-            </h3>
-            <p className="text-3xl font-black text-purple-600 mt-2">
+          {/* Gallery Media */}
+          <div className="stat-card card-gallery">
+            <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
+            <div className="flex items-center justify-between relative z-10">
+              <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                Gallery Media
+              </h3>
+              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+                <FiImage />
+              </div>
+            </div>
+            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               {stats.gallery}
             </p>
-            <Link
-              to="/admin/gallery"
-              className="text-[11px] text-purple-500 font-semibold mt-1 inline-block hover:underline"
-            >
-              Manage gallery →
-            </Link>
+            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+              <span className="text-xs font-medium text-white/85">
+                Uploaded stories
+              </span>
+              <Link
+                to="/admin/gallery"
+                className="text-xs font-semibold text-white/95 hover:text-white flex items-center gap-1 transition group"
+              >
+                <span>Manage</span>
+                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
         </div>
 
