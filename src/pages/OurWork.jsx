@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SEO from "../components/common/SEO";
 
-import educationImg from "../assets/placeholders/education.png";
-import communityImg from "../assets/placeholders/community.png";
-import seniorImg from "../assets/placeholders/senior.png";
-import animalImg from "../assets/placeholders/animal.png";
+import educationImg from "../assets/placeholders/education.webp";
+import communityImg from "../assets/placeholders/community.webp";
+import seniorImg from "../assets/placeholders/senior.webp";
+import animalImg from "../assets/placeholders/animal.webp";
 
 const workItems = [
   {
@@ -36,6 +37,11 @@ const workItems = [
 export default function OurWork() {
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
+      <SEO
+        title="Our Work"
+        description="Discover Mannat Foundation initiatives in Education Support, Community Welfare, Senior Citizen Care, and Animal Welfare."
+        url="https://mannatfoundation.org/our-work"
+      />
        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

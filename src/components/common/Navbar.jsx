@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
 
-
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,12 +16,8 @@ const Navbar = () => {
   }, []);
 
   const navLinkClass = ({ isActive }) =>
-    `transition ${
-      isActive
-        ? "text-green-600 font-semibold"
-        : scrolled
-        ? "text-gray-800 hover:text-green-600"
-        : "text-white hover:text-green-300"
+    `px-4 py-2 font-medium transition ${
+      isActive ? "text-orange-500 font-semibold" : "text-green-600 hover:text-orange-400"
     }`;
 
   return (
@@ -32,95 +27,44 @@ const Navbar = () => {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        
         {/* Logo */}
-       <Link
-  to="/"
-  className="flex items-center gap-2 transition"
->
-  <img
-    src={logo}
-    alt="Mannat Foundation Logo"
-    className="w-10 h-10 object-contain "
-  />
-  <span
-    className={`text-xl font-bold ${
-      scrolled ? "text-green-600" : "text-green-600"
-    }`}
-  >
-    Mannat Foundation
-  </span>
-</Link>
+        <Link to="/" className="flex items-center gap-2 transition">
+          <img
+            src={logo}
+            alt="Mannat Foundation Logo"
+            className="w-10 h-10 object-contain"
+          />
+          <span className="text-xl font-bold text-green-600">
+            Mannat Foundation
+          </span>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
-          
-          <NavLink
-  to="/about"
-  className={({ isActive }) =>
-    `px-4 py-2 font-medium transition ${
-      isActive ? "text-orange-500" : "text-green-600 hover:text-orange-400"
-    }`
-  }
->
-  About
-</NavLink>
-
-          <NavLink
-  to="/our-work"
-  className={({ isActive }) =>
-    `px-4 py-2 font-medium transition ${
- isActive ? "text-orange-500" : "text-green-600 hover:text-orange-400"
-    }`
-  }
->
-  Our Work
-</NavLink>
-
-         <NavLink
-  to="/gallery"
-  className={({ isActive }) =>
-    `px-4 py-2 font-medium transition ${
-   isActive ? "text-orange-500" : "text-green-600 hover:text-orange-400"
-      }`
-  }
->
-  Gallery
-</NavLink>
-
-<NavLink
-  to="/join-us"
-  className={({ isActive }) =>
-    `px-4 py-2 font-medium transition ${
- isActive ? "text-orange-500" : "text-green-600 hover:text-orange-400"
-    }`
-  }
->
-  Join Us
-</NavLink>
-
-
-         <NavLink
-  to="/contact"
-  className={({ isActive }) =>
-    `px-4 py-2 font-medium transition ${
- isActive ? "text-orange-500" : "text-green-600 hover:text-orange-400" 
-    }`
-  }
->
-  Contact Us
-</NavLink>
-
+          <NavLink to="/about" className={navLinkClass}>
+            About
+          </NavLink>
+          <NavLink to="/our-work" className={navLinkClass}>
+            Our Work
+          </NavLink>
+          <NavLink to="/gallery" className={navLinkClass}>
+            Gallery
+          </NavLink>
+          <NavLink to="/join-us" className={navLinkClass}>
+            Join Us
+          </NavLink>
+          <NavLink to="/contact" className={navLinkClass}>
+            Contact Us
+          </NavLink>
         </ul>
 
         {/* Donate Button */}
-       <NavLink
-  to="/donate"
-  className="ml-6 bg-green-700 text-white px-5 py-2 rounded-md font-semibold hover:bg-orange-400 transition"
->
-  Donate
-</NavLink>
-
+        <NavLink
+          to="/donate"
+          className="ml-6 bg-green-700 text-white px-5 py-2 rounded-md font-semibold hover:bg-orange-400 transition"
+        >
+          Donate
+        </NavLink>
 
         {/* Mobile Toggle */}
         <button
@@ -141,11 +85,12 @@ const Navbar = () => {
             <NavLink onClick={() => setMenuOpen(false)} to="/about">About</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/our-work">Our Work</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/gallery">Gallery</NavLink>
+            <NavLink onClick={() => setMenuOpen(false)} to="/join-us">Join Us</NavLink>
             <NavLink onClick={() => setMenuOpen(false)} to="/contact">Contact</NavLink>
             <Link
               onClick={() => setMenuOpen(false)}
               to="/donate"
-              className="bg-green-700 text-white text-center py-2 rounded-md"
+              className="bg-green-700 text-white text-center py-2 rounded-md font-semibold hover:bg-green-800 transition"
             >
               Donate
             </Link>

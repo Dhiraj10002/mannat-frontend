@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { motion } from "framer-motion";
 import SEO from "../components/common/SEO";
-import adminApi from "../services/api";
-
-
-
+import API from "../services/api";
 
 Modal.setAppElement("#root");
 
@@ -14,32 +11,16 @@ const Gallery = () => {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
 
-
-    <>
-    <SEO
-      title="Gallery"
-      description="Explore photos from Mannat Foundation's community programs, education drives, and welfare initiatives."
-      image="/gallery-og.jpg"
-      url="https://mannatfoundation.org/gallery"
-    />
-
-    <h1>Gallery</h1>
-  </>
-
-
-
-
   useEffect(() => {
     fetchGallery();
   }, []);
 
   const fetchGallery = async () => {
     try {
-       const res = await adminApi.get("/gallery");
-
-        setGallery(res.data);
+      const res = await API.get("/gallery");
+      setGallery(res.data);
     } catch (err) {
-      console.error("Failed to load gallery");
+      console.error("Failed to load gallery", err);
     } finally {
       setLoading(false);
     }
@@ -56,12 +37,14 @@ const Gallery = () => {
     return url; // video streaming optimized by CDN automatically
   };
 
-  if (loading) {
-    return <p className="text-center mt-20">Loading gallery...</p>;
-  }
-
   return (
     <section className="bg-white min-h-screen">
+      <SEO
+        title="Gallery"
+        description="Explore photos from Mannat Foundation's community programs, education drives, and welfare initiatives."
+        image="/gallery-og.jpg"
+        url="https://mannatfoundation.org/gallery"
+      />
       <div className="max-w-7xl mx-auto px-6 py-20">
 
         {/* Header */}
@@ -80,33 +63,45 @@ const Gallery = () => {
         </motion.div>
 
         {/* Grid */}
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {gallery.map((item, index) => (
-            <motion.div
-              key={item._id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              onClick={() => setSelected(item)}
-              className="cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg"
-            >
-              {item.type === "image" ? (
-                <img
-                  src={optimize(item.url, "image")}
-                  alt="gallery"
-                  loading="lazy"
-                  className="w-full h-56 object-cover hover:scale-105 transition"
-                />
-              ) : (
-                <video
-                  src={item.url}
-                  className="w-full h-56 object-cover"
-                  muted
-                />
-              )}
-            </motion.div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="w-full h-56 rounded-xl bg-gray-200 animate-pulse" />
+            ))}
+          </div>
+        ) : gallery.length === 0 ? (
+          <div className="mt-14 text-center py-12 text-gray-500">
+            No gallery items available at this time.
+          </div>
+        ) : (
+          <div className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {gallery.map((item, index) => (
+              <motion.div
+                key={item._id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => setSelected(item)}
+                className="cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg"
+              >
+                {item.type === "image" ? (
+                  <img
+                    src={optimize(item.url, "image")}
+                    alt="gallery"
+                    loading="lazy"
+                    className="w-full h-56 object-cover hover:scale-105 transition"
+                  />
+                ) : (
+                  <video
+                    src={item.url}
+                    className="w-full h-56 object-cover"
+                    muted
+                  />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* LIGHTBOX MODAL */}

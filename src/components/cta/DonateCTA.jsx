@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import donateBg from "/src/assets/donate-bg.jpg"; // <-- your image
+import donateBg from "../../assets/donate-bg.webp";
 
 const DonateCTA = () => {
   const navigate = useNavigate();

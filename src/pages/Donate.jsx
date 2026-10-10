@@ -1,9 +1,15 @@
 import { motion } from "framer-motion";
 import { FaUniversity, FaQrcode, FaInfoCircle } from "react-icons/fa";
+import SEO from "../components/common/SEO";
 
 const Donate = () => {
   return (
     <section className="bg-white min-h-screen">
+      <SEO
+        title="Donate & Support"
+        description="Support Mannat Foundation initiatives in education, community welfare, senior citizen care, and animal aid."
+        url="https://mannatfoundation.org/donate"
+      />
       <div className="max-w-5xl mx-auto px-6 py-20">
 
         {/* Header */}

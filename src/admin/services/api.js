@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "";
+const baseURL = rawBaseUrl ? `${rawBaseUrl.replace(/\/+$/, "")}/api` : "/api";
+
 const adminApi = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL + "/api",
+  baseURL,
 });
 
 adminApi.interceptors.request.use((config) => {

@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { FaUser, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import API from "../services/api";
+import SEO from "../components/common/SEO";
 
 const JoinUs = () => {
   const [formData, setFormData] = useState({
@@ -47,6 +48,11 @@ const JoinUs = () => {
 
   return (
     <section className="bg-green-50 min-h-screen">
+      <SEO
+        title="Join Us"
+        description="Volunteer and become a part of Mannat Foundation's mission to create positive change."
+        url="https://mannatfoundation.org/join-us"
+      />
       <div className="max-w-3xl mx-auto px-6 py-20">
 
         {/* Header */}

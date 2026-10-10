@@ -16,16 +16,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
-
-   <>
-    <SEO
-      title="Contact Us"
-      description="Get in touch with Mannat Foundation for donations, volunteering, or partnership opportunities."
-      url="https://mannatfoundation.org/contact"
-    />
-
-    <h1>Contact Us</h1>
-  </>
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,13 +24,14 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     try {
-          await API.post("/contact", {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        });
+      await API.post("/contact", {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      });
 
       toast.success("Thank you for contacting us. We will reply soon!");
 
@@ -51,11 +43,18 @@ const Contact = () => {
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
     <section className="bg-gray-50 min-h-screen">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with Mannat Foundation for donations, volunteering, or partnership opportunities."
+        url="https://mannatfoundation.org/contact"
+      />
       <div className="max-w-6xl mx-auto px-6 py-20">
 
         {/* Header */}
@@ -145,9 +144,14 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-green-700 text-white py-3 rounded-lg font-semibold hover:bg-green-800 transition"
+              disabled={submitting}
+              className={`w-full py-3 rounded-lg font-semibold transition ${
+                submitting
+                  ? "bg-gray-400 cursor-not-allowed text-white"
+                  : "bg-green-700 text-white hover:bg-green-800"
+              }`}
             >
-              Send Message
+              {submitting ? "Sending..." : "Send Message"}
             </button>
           </motion.form>
 

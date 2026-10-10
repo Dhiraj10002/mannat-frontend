@@ -9,7 +9,8 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem("token"); // 🔑 clear auth
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("token");
     navigate("/admin/login", { replace: true });
   };
 

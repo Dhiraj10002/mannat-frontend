@@ -2,10 +2,10 @@ import ImpactStats from "../ourWork/ImpactStats";
 import WorkCard from "../ourWork/WorkCard";
 import { motion } from "framer-motion";
 
-import educationImg from "../../assets/placeholders/education.png";
-import communityImg from "../../assets/placeholders/community.png";
-import seniorImg from "../../assets/placeholders/senior.png";
-import animalImg from "../../assets/placeholders/animal.png";
+import educationImg from "../../assets/placeholders/education.webp";
+import communityImg from "../../assets/placeholders/community.webp";
+import seniorImg from "../../assets/placeholders/senior.webp";
+import animalImg from "../../assets/placeholders/animal.webp";
 
 const works = [
   {

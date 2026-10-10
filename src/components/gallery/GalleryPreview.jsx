@@ -1,38 +1,25 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import API from "../../services/api";
 import { Link } from "react-router-dom";
 
 const GalleryPreview = () => {
   const [items, setItems] = useState([]);
-  const trackRef = useRef(null);
 
   useEffect(() => {
+    let isMounted = true;
     API
-  .get("/gallery")
-  .then((res) => setItems(res.data))
-  .catch(console.error);
+      .get("/gallery")
+      .then((res) => {
+        if (isMounted && Array.isArray(res.data)) {
+          setItems(res.data);
+        }
+      })
+      .catch((err) => console.error("GalleryPreview error:", err));
 
+    return () => {
+      isMounted = false;
+    };
   }, []);
-
-  // AUTO SCROLL (RIGHT → LEFT)
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || !items.length) return;
-
-    let scrollAmount = 0;
-
-    const interval = setInterval(() => {
-      scrollAmount += 1;
-
-      if (scrollAmount >= track.scrollWidth / 2) {
-        scrollAmount = 0;
-      }
-
-      track.style.transform = `translateX(-${scrollAmount}px)`;
-    }, 20); // smooth speed
-
-    return () => clearInterval(interval);
-  }, [items]);
 
   if (!items.length) return null;
 
@@ -47,23 +34,21 @@ const GalleryPreview = () => {
           Moments from our work, volunteers, and community initiatives.
         </p>
 
-        {/* SCROLLER */}
-        <div className="relative mt-12 overflow-hidden">
-          <div
-            ref={trackRef}
-            className="flex gap-6 w-max transition-transform duration-0"
-          >
+        {/* SCROLLER (Hardware Accelerated CSS Marquee) */}
+        <div className="relative mt-12 overflow-hidden mask-fade">
+          <div className="animate-marquee flex gap-6">
             {[...items, ...items].map((item, idx) => (
               <div
-                key={idx}
-                className="w-74 h-52 flex-shrink-0 rounded-xl overflow-hidden shadow-md"
+                key={`${item._id || idx}-${idx}`}
+                className="w-72 h-52 flex-shrink-0 rounded-xl overflow-hidden shadow-md group relative"
               >
                 {item.type === "image" ? (
                   <img
                     src={item.url}
-                    alt=""
-                    className="w-full h-full object-cover"
+                    alt={item.title || "Gallery thumbnail"}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <video
@@ -71,6 +56,7 @@ const GalleryPreview = () => {
                     muted
                     autoPlay
                     loop
+                    playsInline
                     className="w-full h-full object-cover"
                   />
                 )}
@@ -83,7 +69,7 @@ const GalleryPreview = () => {
         <div className="text-center mt-14">
           <Link
             to="/gallery"
-            className="inline-block border border-green-700 text-green-700 px-8 py-3 rounded-lg hover:bg-green-700 hover:text-white transition"
+            className="inline-block border border-green-700 text-green-700 px-8 py-3 rounded-lg hover:bg-green-700 hover:text-white transition font-medium"
           >
             View Full Gallery
           </Link>

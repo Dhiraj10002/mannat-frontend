@@ -38,34 +38,33 @@ const Hero = () => {
               who need it most.
             </p>
             <div className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-  {/* Donate Button */}
-  <button className="px-8 py-3 border-1 text-gray-100 rounded-xl text-lg font-semibold shadow-lg hover:bg-green-700 transition">
-    Donate Now
-  </button>
+              {/* Donate Button */}
+              <Link
+                to="/donate"
+                className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl text-lg font-semibold shadow-lg transition inline-flex items-center justify-center"
+              >
+                Donate Now
+              </Link>
 
-  {/* QR Card */}
-  <div className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-xl border border-green-100">
-    {/* Glow */}
-    <div className="absolute inset-0  rounded-2xl ring-5 ring-green-400/30"></div>
-        <motion.div
-  animate={{ y: [0, -6, 0] }}
-  transition={{ repeat: Infinity, duration: 3 }}
->
-  {/* QR Card here */}
-</motion.div>
-    <img
-      src={qrCode}
-      alt="Donate QR Code"
-      className="w-36 h-38 bg-white rounded-xl overflow-hidden shadow-inner flex items-center justify-center"
-    />
+              {/* QR Card */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ repeat: Infinity, duration: 3 }}
+                className="relative bg-white/90 backdrop-blur rounded-2xl p-4 shadow-xl border border-green-100"
+              >
+                {/* Glow */}
+                <div className="absolute inset-0 rounded-2xl ring-4 ring-green-400/30 pointer-events-none"></div>
+                <img
+                  src={qrCode}
+                  alt="Donate QR Code"
+                  className="w-36 h-36 bg-white rounded-xl overflow-hidden shadow-inner object-contain"
+                />
 
-    <p className="mt-1 text-center text-sm font-semibold text-gray-800">
-      Scan to Donate
-    </p>
-
-    
-  </div>
-</div>
+                <p className="mt-2 text-center text-sm font-semibold text-gray-800">
+                  Scan to Donate
+                </p>
+              </motion.div>
+            </div>
 
 
           </motion.div>

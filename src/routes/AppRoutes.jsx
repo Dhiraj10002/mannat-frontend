@@ -1,42 +1,49 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-/* Public */
-import Home from "../pages/Home";
-import About from "../pages/About";
-import OurWork from "../pages/OurWork";
-import Contact from "../pages/Contact";
-import JoinUs from "../pages/JoinUs";
-import Gallery from "../pages/Gallery";
-import Donate from "../pages/Donate";
-
-/* Admin */
-import Login from "../admin/pages/Login";
-import Dashboard from "../admin/pages/Dashboard";
-import AdminContacts from "../admin/pages/Contacts";
-import AdminJoinUs from "../admin/pages/JoinUs";
-import AdminGallery from "../admin/pages/Gallery";
-
-
+import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "../admin/components/ProtectedRoute";
 import AdminLayout from "../admin/components/AdminLayout";
-import MainLayout from "../layouts/MainLayout";
+import Loader from "../components/common/Loader";
+
+/* Public Pages (Lazy Loaded) */
+const Home = lazy(() => import("../pages/Home"));
+const About = lazy(() => import("../pages/About"));
+const OurWork = lazy(() => import("../pages/OurWork"));
+const Contact = lazy(() => import("../pages/Contact"));
+const JoinUs = lazy(() => import("../pages/JoinUs"));
+const Gallery = lazy(() => import("../pages/Gallery"));
+const Donate = lazy(() => import("../pages/Donate"));
+
+/* Admin Pages (Lazy Loaded) */
+const Login = lazy(() => import("../admin/pages/Login"));
+const Dashboard = lazy(() => import("../admin/pages/Dashboard"));
+const AdminContacts = lazy(() => import("../admin/pages/Contacts"));
+const AdminJoinUs = lazy(() => import("../admin/pages/JoinUs"));
+const AdminGallery = lazy(() => import("../admin/pages/Gallery"));
+
+const withSuspense = (Component) => (
+  <Suspense fallback={<Loader />}>
+    <Component />
+  </Suspense>
+);
 
 const AppRoutes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
-      {path: "our-work", element: <OurWork /> },
-      { path: "contact", element: <Contact /> },
-      { path: "join-us", element: <JoinUs /> },
-      { path: "gallery", element: <Gallery /> },
-      { path: "donate", element: <Donate /> },
+      { index: true, element: withSuspense(Home) },
+      { path: "about", element: withSuspense(About) },
+      { path: "our-work", element: withSuspense(OurWork) },
+      { path: "contact", element: withSuspense(Contact) },
+      { path: "join-us", element: withSuspense(JoinUs) },
+      { path: "gallery", element: withSuspense(Gallery) },
+      { path: "donate", element: withSuspense(Donate) },
     ],
   },
 
-  { path: "/admin/login", element: <Login /> },
+  { path: "/admin/login", element: withSuspense(Login) },
 
   {
     path: "/admin",
@@ -45,10 +52,10 @@ const AppRoutes = createBrowserRouter([
       {
         element: <AdminLayout />,
         children: [
-          { index: true, element: <Dashboard /> },
-          { path: "contacts", element: <AdminContacts /> },
-          { path: "join-us", element: <AdminJoinUs /> },
-          { path: "gallery", element: <AdminGallery /> },
+          { index: true, element: withSuspense(Dashboard) },
+          { path: "contacts", element: withSuspense(AdminContacts) },
+          { path: "join-us", element: withSuspense(AdminJoinUs) },
+          { path: "gallery", element: withSuspense(AdminGallery) },
         ],
       },
     ],

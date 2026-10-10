@@ -1,6 +1,6 @@
-import VolsImg from "../../assets/testimonials/Volsimg.png";
-import donorImg from "../../assets/testimonials/donorImg.png";
-import commImg from "../../assets/testimonials/commImg.png";
+import VolsImg from "../../assets/testimonials/Volsimg.webp";
+import donorImg from "../../assets/testimonials/donorImg.webp";
+import commImg from "../../assets/testimonials/commImg.webp";
 
 const testimonials = [
   {

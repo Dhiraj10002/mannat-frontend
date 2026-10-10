@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import TeamCard from "./TeamCard";
 
 
-import TechImg from "../../assets/teams/TechImg.png";
-import FounderImg from  "../../assets/teams/FoundImg.png";
-import EventImg from  "../../assets/teams/EventImg.png";
-import volImg from  "../../assets/teams/volImg.png";
+import TechImg from "../../assets/teams/TechImg.webp";
+import FounderImg from "../../assets/teams/FoundImg.webp";
+import EventImg from "../../assets/teams/EventImg.webp";
+import volImg from "../../assets/teams/volImg.webp";
 
 
 const teamMembers = [

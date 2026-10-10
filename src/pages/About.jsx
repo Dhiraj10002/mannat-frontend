@@ -4,10 +4,16 @@ import {
   FaEye,
   FaBullseye,
 } from "react-icons/fa";
+import SEO from "../components/common/SEO";
 
 const About = () => {
   return (
     <section className="bg-white min-h-screen">
+      <SEO
+        title="About Us"
+        description="Learn about Mannat Foundation, our mission, vision, and grassroots initiatives for education and welfare."
+        url="https://mannatfoundation.org/about"
+      />
       <div className="max-w-6xl mx-auto px-6 py-20">
 
         {/* Header */}

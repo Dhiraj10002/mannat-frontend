@@ -21,7 +21,7 @@ export default function Login() {
       localStorage.setItem("adminToken", res.data.token);
 
       navigate("/admin");
-    } catch (err) {
+    } catch {
       alert("Invalid credentials");
     }
   };
