@@ -10,7 +10,7 @@ const Footer = () => {
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12">
           
-          {/* 1️⃣ Mannat Foundation + QR */}
+          {/* 1️⃣ Mannat Foundation Info */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">
               Mannat Foundation
@@ -21,12 +21,9 @@ const Footer = () => {
               communities through education, welfare, and social awareness.
             </p>
 
-            {/* Static QR */}
-            <img
-              src="/qr-code.png" // place in public folder
-              alt="Donate QR"
-              className="w-36 mt-4 rounded-md bg-white "
-            />
+            <p className="text-xs text-gray-400 mt-4 leading-relaxed">
+              Committed to transparency, community welfare, and sustainable grassroots empowerment.
+            </p>
           </div>
 
           {/* 2️⃣ Quick Links */}
