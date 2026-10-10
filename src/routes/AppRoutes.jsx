@@ -18,6 +18,7 @@ const Donate = lazy(() => import("../pages/Donate"));
 /* Admin Pages (Lazy Loaded) */
 const Login = lazy(() => import("../admin/pages/Login"));
 const Dashboard = lazy(() => import("../admin/pages/Dashboard"));
+const AdminDonations = lazy(() => import("../admin/pages/Donations"));
 const AdminContacts = lazy(() => import("../admin/pages/Contacts"));
 const AdminJoinUs = lazy(() => import("../admin/pages/JoinUs"));
 const AdminGallery = lazy(() => import("../admin/pages/Gallery"));
@@ -53,6 +54,7 @@ const AppRoutes = createBrowserRouter([
         element: <AdminLayout />,
         children: [
           { index: true, element: withSuspense(Dashboard) },
+          { path: "donations", element: withSuspense(AdminDonations) },
           { path: "contacts", element: withSuspense(AdminContacts) },
           { path: "join-us", element: withSuspense(AdminJoinUs) },
           { path: "gallery", element: withSuspense(AdminGallery) },
