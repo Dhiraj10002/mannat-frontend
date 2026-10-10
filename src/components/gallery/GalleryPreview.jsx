@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../../services/api";
 import { Link } from "react-router-dom";
+import { getOptimizedMediaUrl } from "../../utils/cloudinary";
 
 const GalleryPreview = () => {
   const [items, setItems] = useState([]);
@@ -40,11 +41,11 @@ const GalleryPreview = () => {
             {[...items, ...items].map((item, idx) => (
               <div
                 key={`${item._id || idx}-${idx}`}
-                className="w-72 h-52 flex-shrink-0 rounded-xl overflow-hidden shadow-md group relative"
+                className="w-72 h-52 flex-shrink-0 rounded-xl overflow-hidden shadow-md group relative bg-gray-100"
               >
                 {item.type === "image" ? (
                   <img
-                    src={item.url}
+                    src={getOptimizedMediaUrl(item.url, "image", "thumbnail")}
                     alt={item.title || "Gallery thumbnail"}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
@@ -52,7 +53,7 @@ const GalleryPreview = () => {
                   />
                 ) : (
                   <video
-                    src={item.url}
+                    src={getOptimizedMediaUrl(item.url, "video", "thumbnail")}
                     muted
                     autoPlay
                     loop

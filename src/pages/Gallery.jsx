@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { motion } from "framer-motion";
 import SEO from "../components/common/SEO";
 import API from "../services/api";
+import { getOptimizedMediaUrl } from "../utils/cloudinary";
 
 Modal.setAppElement("#root");
 
@@ -24,17 +25,6 @@ const Gallery = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  /* ✅ Cloudinary Optimized URL */
-  const optimize = (url, type) => {
-    if (type === "image") {
-      return url.replace(
-        "/upload/",
-        "/upload/q_auto,f_auto,w_600/"
-      );
-    }
-    return url; // video streaming optimized by CDN automatically
   };
 
   return (
@@ -82,20 +72,23 @@ const Gallery = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
                 onClick={() => setSelected(item)}
-                className="cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg"
+                className="cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg bg-gray-100"
               >
                 {item.type === "image" ? (
                   <img
-                    src={optimize(item.url, "image")}
+                    src={getOptimizedMediaUrl(item.url, "image", "thumbnail")}
                     alt="gallery"
                     loading="lazy"
-                    className="w-full h-56 object-cover hover:scale-105 transition"
+                    decoding="async"
+                    className="w-full h-56 object-cover hover:scale-105 transition duration-300"
                   />
                 ) : (
                   <video
-                    src={item.url}
+                    src={getOptimizedMediaUrl(item.url, "video", "thumbnail")}
                     className="w-full h-56 object-cover"
                     muted
+                    loop
+                    playsInline
                   />
                 )}
               </motion.div>
@@ -108,33 +101,35 @@ const Gallery = () => {
       <Modal
         isOpen={!!selected}
         onRequestClose={() => setSelected(null)}
-        className="max-w-3xl mx-auto mt-4 bg-white rounded-xl outline-none p-3"
-        overlayClassName="fixed inset-0 bg-black/70 flex items-start justify-center z-50"
+        className="max-w-3xl mx-auto mt-6 bg-white rounded-2xl outline-none p-4 shadow-2xl overflow-hidden"
+        overlayClassName="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       >
         {selected && (
-          <>
+          <div>
             {selected.type === "image" ? (
               <img
-                src={selected.url.replace("/upload/", "/upload/q_auto,f_auto/")}
+                src={getOptimizedMediaUrl(selected.url, "image", "lightbox")}
                 alt="preview"
-                className="w-full rounded-lg"
+                className="w-full max-h-[75vh] object-contain rounded-xl"
               />
             ) : (
               <video
-                src={selected.url}
+                src={getOptimizedMediaUrl(selected.url, "video", "lightbox")}
                 controls
                 autoPlay
-                className="w-full rounded-lg"
+                className="w-full max-h-[75vh] rounded-xl"
               />
             )}
 
-            <button
-              onClick={() => setSelected(null)}
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg"
-            >
-              Close
-            </button>
-          </>
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={() => setSelected(null)}
+                className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2 rounded-xl text-sm font-semibold transition"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         )}
       </Modal>
     </section>
