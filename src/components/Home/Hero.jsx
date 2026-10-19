@@ -4,7 +4,7 @@ import { FaShieldAlt, FaHeart } from "react-icons/fa";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full min-h-[calc(100svh-4.5rem)] lg:min-h-[calc(100svh-5.5rem)] flex items-center overflow-hidden">
       {/* Background Image */}
       <img
         src="/hero-bg.webp"
@@ -17,8 +17,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/35"></div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="w-full max-w-7xl px-6 md:px-10 lg:px-16">
+      <div className="relative z-10 w-full flex items-center py-12 sm:py-16 lg:py-20">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ const Hero = () => {
               and healthcare. Your contribution enables real, lasting grassroots impact.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4">
               {/* Primary CTA */}
               <Link
                 to="/donate"
