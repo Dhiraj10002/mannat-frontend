@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import adminApi from "../services/api";
+import { FiMail } from "react-icons/fi";
 import ViewModal from "../components/ViewModal";
 import { exportToCSV } from "../../utils/exportCsv";
 import { FaSearch, FaFileCsv } from "react-icons/fa";
@@ -62,12 +63,12 @@ export default function Contacts() {
   };
 
   return (
-    <div className="contacts-page max-w-7xl mx-auto p-4">
+    <div className="contacts-page max-w-7xl mx-auto">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 className="page-title text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <span>📩 Contact Messages</span>
+          <h2 className="page-title text-2xl font-bold text-gray-900 flex flex-wrap items-center gap-2">
+            <FiMail aria-hidden="true" /><span>Contact Messages</span>
             <span className="text-xs bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full font-bold">
               {filteredContacts.length}
             </span>
@@ -79,7 +80,7 @@ export default function Contacts() {
 
         <button
           onClick={handleExport}
-          className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow transition self-start sm:self-auto"
+          className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow transition self-start xl:self-auto shrink-0"
         >
           <FaFileCsv />
           <span>Export CSV</span>
@@ -87,11 +88,12 @@ export default function Contacts() {
       </div>
 
       {/* Search & Filter Bar */}
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="relative w-full md:w-80">
+      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-col xl:flex-row gap-4 items-center justify-between">
+        <div className="relative w-full xl:w-80 xl:shrink-0">
           <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
           <input
             type="text"
+            aria-label="Search records"
             placeholder="Search name, email, message..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -100,14 +102,14 @@ export default function Contacts() {
         </div>
 
         {/* Status Pills */}
-        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+        <div className="flex flex-wrap items-center gap-2 w-full xl:w-auto">
           <span className="text-xs font-semibold text-gray-400 mr-1">Status:</span>
           {STATUS_OPTIONS.map((status) => (
             <button
               key={status}
               type="button"
               onClick={() => setStatusFilter(status)}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold transition ${
+              className={`min-h-11 px-3 py-2 rounded-lg text-xs font-semibold transition ${
                 statusFilter === status
                   ? "bg-green-700 text-white shadow-sm"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -121,7 +123,7 @@ export default function Contacts() {
 
       {/* Table */}
       <div className="table-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="overflow-x-auto">
+        <div className="admin-table-scroll" tabIndex="0" role="region" aria-label="Scrollable records">
           <table className="admin-table w-full text-left">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">
