@@ -1,68 +1,283 @@
-.login-container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #0f172a, #020617);
+.admin-login {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: radial-gradient(ellipse at 10% 5%, #dcece3, transparent 55%), #f3f6f4;
+  color: #152d22;
 }
 
-.login-card {
-  background: #ffffff;
-  padding: 32px;
-  width: 360px;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-  text-align: center;
-}
-
-.login-card h2 {
-  margin-bottom: 6px;
-  font-size: 24px;
-}
-
-.subtitle {
-  color: #64748b;
-  margin-bottom: 20px;
-}
-
-.login-card input {
+.admin-login__layout {
+  display: grid;
   width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  font-size: 14px;
-}
-.toggle-password {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  user-select: none;
+  max-width: 62rem;
+  border: 1px solid #dce6df;
+  border-radius: 1.75rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(22 65 42 / 10%);
 }
 
-.password-wrapper {
+.admin-login__story {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: #103d2b;
+  color: #fff;
+}
+
+.admin-login__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: flex-start;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.admin-login__brand > span > span {
+  font-weight: 400;
+  color: #c2dfcd;
+}
+
+.admin-login__brand img {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-login__story-copy, .admin-login__story-footer {
+  display: none;
+}
+
+.admin-login__form-panel {
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.admin-login__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #63776b;
+  font-size: 0.8125rem;
+  min-height: 2.75rem;
+}
+
+.admin-login__back:hover {
+  color: #15803d;
+}
+
+.admin-login__intro {
+  margin-block: 1.5rem 2rem;
+}
+
+.admin-login__lock {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #dcebe1;
+  border-radius: 1rem;
+  background: #eff8f2;
+  color: #15803d;
+  font-size: 1.25rem;
+}
+
+.admin-login__eyebrow {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.admin-login__intro .admin-login__eyebrow {
+  color: #15803d;
+}
+
+.admin-login h1 {
+  margin-top: 0.5rem;
+  font-size: clamp(1.75rem, 3vw, 2rem);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.admin-login__intro p {
+  margin-top: 0.75rem;
+  color: #63776b;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.admin-login__form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.admin-login__form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.admin-login__field {
+  display: flex;
+  align-items: center;
   position: relative;
 }
 
-.login-card input:focus {
-  outline: none;
-  border-color: #2563eb;
+.admin-login__field > svg {
+  position: absolute;
+  left: 1rem;
+  color: #788d7f;
+  pointer-events: none;
 }
 
-.login-card button {
+.admin-login__field input {
   width: 100%;
-  padding: 12px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
+  min-width: 0;
+  min-height: 3.25rem;
+  padding: 0.75rem 3rem 0.75rem 2.75rem;
+  border: 1px solid #d9e3dd;
+  border-radius: 0.75rem;
+  background: #fcfdfc;
+  font-size: 1rem;
+  color: #172e22;
 }
 
-.login-card button:hover {
-  background: #1e40af;
+.admin-login__field input::placeholder {
+  color: #829087;
+}
+
+.admin-login__field input:focus {
+  outline: 2px solid #15803d;
+  outline-offset: 2px;
+  border-color: #15803d;
+  background: #fff;
+}
+
+.admin-login__password-toggle {
+  position: absolute;
+  right: 0.25rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: #63776b;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.125rem;
+}
+
+.admin-login__password-toggle:hover {
+  background: #edf6f0;
+  color: #15803d;
+}
+
+.admin-login__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  margin-top: 0.5rem;
+  border-radius: 0.75rem;
+  background: #15803d;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+.admin-login__submit:hover {
+  background: #166534;
+}
+
+.admin-login__submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.admin-login__note {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: #738378;
+  line-height: 1.6;
+}
+
+.admin-login__error {
+  margin-bottom: 1.25rem;
+  padding: 0.875rem;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  background: #fff1f2;
+  color: #9f1239;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.admin-login :is(a, button):focus-visible {
+  outline: 2px solid #22c55e;
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .admin-login__layout {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+  .admin-login__story {
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 2.5rem;
+    background: radial-gradient(circle at 0 100%, #226447, transparent 65%), #103d2b;
+  }
+  .admin-login__brand > span > span {
+    display: block;
+  }
+  .admin-login__story-copy {
+    display: block;
+  }
+  .admin-login__story-copy .admin-login__eyebrow {
+    color: #a4d8b8;
+    font-size: 0.625rem;
+  }
+  .admin-login__story-copy h2 {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    font-weight: 650;
+    letter-spacing: -0.04em;
+  }
+  .admin-login__story-copy p {
+    margin-top: 1.5rem;
+    max-width: 18rem;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #bfd9c9;
+  }
+  .admin-login__story-footer {
+    display: block;
+    color: #a4c5b1;
+    font-size: 0.6875rem;
+  }
+  .admin-login__form-panel {
+    padding: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-login * {
+    transition: none;
+  }
 }

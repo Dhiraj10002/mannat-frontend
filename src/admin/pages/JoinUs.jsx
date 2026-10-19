@@ -1,3 +1,5 @@
+import AdminDialog from "../components/AdminDialog";
+import { FiUsers } from "react-icons/fi";
 import { useEffect, useState, useMemo } from "react";
 import adminApi from "../services/api";
 import { exportToCSV } from "../../utils/exportCsv";
@@ -60,12 +62,12 @@ export default function JoinUs() {
   };
 
   return (
-    <div className="joinus max-w-7xl mx-auto p-4">
+    <div className="joinus max-w-7xl mx-auto">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 className="page-title text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <span>🙋 Volunteer Applications</span>
+          <h2 className="page-title text-2xl font-bold text-gray-900 flex flex-wrap items-center gap-2">
+            <FiUsers aria-hidden="true" /><span>Volunteer Applications</span>
             <span className="text-xs bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full font-bold">
               {filteredRequests.length}
             </span>
@@ -77,7 +79,7 @@ export default function JoinUs() {
 
         <button
           onClick={handleExport}
-          className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow transition self-start sm:self-auto"
+          className="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow transition self-start xl:self-auto shrink-0"
         >
           <FaFileCsv />
           <span>Export CSV</span>
@@ -85,11 +87,12 @@ export default function JoinUs() {
       </div>
 
       {/* Search & Filter Bar */}
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="relative w-full md:w-80">
+      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-col xl:flex-row gap-4 items-center justify-between">
+        <div className="relative w-full xl:w-80 xl:shrink-0">
           <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
           <input
             type="text"
+            aria-label="Search records"
             placeholder="Search volunteer name, email, phone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -98,14 +101,14 @@ export default function JoinUs() {
         </div>
 
         {/* Status Pills */}
-        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+        <div className="flex flex-wrap items-center gap-2 w-full xl:w-auto">
           <span className="text-xs font-semibold text-gray-400 mr-1">Status:</span>
           {STATUS_OPTIONS.map((status) => (
             <button
               key={status}
               type="button"
               onClick={() => setStatusFilter(status)}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold transition ${
+              className={`min-h-11 px-3 py-2 rounded-lg text-xs font-semibold transition ${
                 statusFilter === status
                   ? "bg-green-700 text-white shadow-sm"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -119,7 +122,7 @@ export default function JoinUs() {
 
       {/* Table */}
       <div className="table-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="overflow-x-auto">
+        <div className="admin-table-scroll" tabIndex="0" role="region" aria-label="Scrollable records">
           <table className="admin-table w-full text-left">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">
@@ -197,7 +200,7 @@ export default function JoinUs() {
 
       {/* VIEW MODAL */}
       {selected && (
-        <div className="modal-overlay">
+        <AdminDialog title="Join Us Details" onClose={() => setSelected(null)}>
           <div className="modal">
             <h3>Join Us Details</h3>
 
@@ -211,7 +214,7 @@ export default function JoinUs() {
               Close
             </button>
           </div>
-        </div>
+        </AdminDialog>
       )}
     </div>
   );

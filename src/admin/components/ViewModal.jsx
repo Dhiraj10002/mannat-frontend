@@ -1,8 +1,9 @@
 import "./ViewModal.css";
+import AdminDialog from "./AdminDialog";
 
 export default function ViewModal({ title, data, onClose }) {
   return (
-    <div className="modal-backdrop">
+    <AdminDialog title={title} onClose={onClose}>
       <div className="modal-box">
         <h3>{title}</h3>
 
@@ -16,6 +17,6 @@ export default function ViewModal({ title, data, onClose }) {
           Close
         </button>
       </div>
-    </div>
+    </AdminDialog>
   );
 }

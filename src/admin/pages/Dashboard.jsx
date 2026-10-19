@@ -7,6 +7,7 @@ import {
   FiUsers,
   FiImage,
   FiArrowRight,
+  FiCreditCard,
 } from "react-icons/fi";
 import adminApi from "../services/api";
 import "./Dashboard.css";
@@ -63,8 +64,8 @@ export default function Dashboard() {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <div className="dashboard max-w-7xl mx-auto p-4 sm:p-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="dashboard max-w-7xl mx-auto">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               Admin Overview
@@ -76,29 +77,29 @@ export default function Dashboard() {
 
           <Link
             to="/admin/donations"
-            className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md transition self-start md:self-auto"
+            className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md transition self-start xl:self-auto shrink-0"
           >
-            <span>💳 View Donations</span>
+            <FiCreditCard aria-hidden="true" /><span>View Donations</span>
           </Link>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-6 mb-10">
           {/* Total Raised */}
           <div className="stat-card card-donations">
             <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center justify-between relative z-10">
+            <div className="flex items-center justify-between gap-3 relative z-10">
               <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
                 Total Raised
               </h3>
-              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+              <div className="w-10 h-10 shrink-0 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
                 <FiHeart />
               </div>
             </div>
-            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
+            <p className="text-3xl sm:text-4xl break-words font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               ₹{stats.totalFunds.toLocaleString("en-IN")}
             </p>
-            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+            <div className="mt-4 flex flex-wrap gap-3 items-center justify-between gap-3 relative z-10 pt-2 border-t border-white/15">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 text-white text-xs font-semibold backdrop-blur-sm border border-white/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
                 {stats.donationsCount} Online Donors
@@ -116,18 +117,18 @@ export default function Dashboard() {
           {/* Contact Queries */}
           <div className="stat-card card-contacts">
             <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center justify-between relative z-10">
+            <div className="flex items-center justify-between gap-3 relative z-10">
               <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
                 Contact Queries
               </h3>
-              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+              <div className="w-10 h-10 shrink-0 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
                 <FiMessageSquare />
               </div>
             </div>
-            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
+            <p className="text-3xl sm:text-4xl break-words font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               {stats.contacts}
             </p>
-            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+            <div className="mt-4 flex flex-wrap gap-3 items-center justify-between gap-3 relative z-10 pt-2 border-t border-white/15">
               <span className="text-xs font-medium text-white/85">
                 New user inquiries
               </span>
@@ -144,18 +145,18 @@ export default function Dashboard() {
           {/* Join Requests */}
           <div className="stat-card card-join">
             <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center justify-between relative z-10">
+            <div className="flex items-center justify-between gap-3 relative z-10">
               <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
                 Join Requests
               </h3>
-              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+              <div className="w-10 h-10 shrink-0 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
                 <FiUsers />
               </div>
             </div>
-            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
+            <p className="text-3xl sm:text-4xl break-words font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               {stats.joinUs}
             </p>
-            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+            <div className="mt-4 flex flex-wrap gap-3 items-center justify-between gap-3 relative z-10 pt-2 border-t border-white/15">
               <span className="text-xs font-medium text-white/85">
                 Volunteer applicants
               </span>
@@ -172,18 +173,18 @@ export default function Dashboard() {
           {/* Gallery Media */}
           <div className="stat-card card-gallery">
             <div className="absolute -right-6 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center justify-between relative z-10">
+            <div className="flex items-center justify-between gap-3 relative z-10">
               <h3 className="text-xs font-bold text-white/90 uppercase tracking-wider">
                 Gallery Media
               </h3>
-              <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
+              <div className="w-10 h-10 shrink-0 rounded-xl bg-white/15 border border-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg shadow-inner">
                 <FiImage />
               </div>
             </div>
-            <p className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
+            <p className="text-3xl sm:text-4xl break-words font-black text-white mt-3 tracking-tight relative z-10 drop-shadow-sm">
               {stats.gallery}
             </p>
-            <div className="mt-4 flex items-center justify-between relative z-10 pt-2 border-t border-white/15">
+            <div className="mt-4 flex flex-wrap gap-3 items-center justify-between gap-3 relative z-10 pt-2 border-t border-white/15">
               <span className="text-xs font-medium text-white/85">
                 Uploaded stories
               </span>
@@ -199,12 +200,12 @@ export default function Dashboard() {
         </div>
 
         {/* Quick Actions Panel */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
           <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Shortcuts</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-4">
             <Link
               to="/admin/donations"
-              className="p-4 rounded-xl bg-gray-50 hover:bg-green-50/70 border border-gray-200/70 transition flex items-center justify-between group"
+              className="p-4 rounded-xl bg-gray-50 hover:bg-green-50/70 border border-gray-200/70 transition flex min-w-0 gap-3 items-center justify-between group"
             >
               <div>
                 <span className="font-bold text-gray-900 text-sm group-hover:text-green-800">
@@ -221,7 +222,7 @@ export default function Dashboard() {
 
             <Link
               to="/admin/contacts"
-              className="p-4 rounded-xl bg-gray-50 hover:bg-blue-50/70 border border-gray-200/70 transition flex items-center justify-between group"
+              className="p-4 rounded-xl bg-gray-50 hover:bg-blue-50/70 border border-gray-200/70 transition flex min-w-0 gap-3 items-center justify-between group"
             >
               <div>
                 <span className="font-bold text-gray-900 text-sm group-hover:text-blue-800">
@@ -238,7 +239,7 @@ export default function Dashboard() {
 
             <Link
               to="/admin/join-us"
-              className="p-4 rounded-xl bg-gray-50 hover:bg-emerald-50/70 border border-gray-200/70 transition flex items-center justify-between group"
+              className="p-4 rounded-xl bg-gray-50 hover:bg-emerald-50/70 border border-gray-200/70 transition flex min-w-0 gap-3 items-center justify-between group"
             >
               <div>
                 <span className="font-bold text-gray-900 text-sm group-hover:text-emerald-800">

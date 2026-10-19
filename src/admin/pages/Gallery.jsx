@@ -120,11 +120,11 @@ export default function Gallery() {
   };
 
   return (
-    <div className="gallery-page max-w-7xl mx-auto p-4 sm:p-6">
+    <div className="gallery-page max-w-7xl mx-auto">
       <Toaster position="top-right" />
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-8">
         <div>
           <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             Gallery Management
@@ -134,7 +134,7 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
             <FiCheckCircle className="text-emerald-600" />
             Cloudinary Auto-Compress Active
@@ -146,7 +146,7 @@ export default function Gallery() {
       </div>
 
       {/* Upload Card */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-10">
+      <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 mb-10">
         <h3 className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2">
           <FiUploadCloud className="text-emerald-600 text-lg" />
           <span>Upload Media (Auto-Compressed)</span>
@@ -155,20 +155,20 @@ export default function Gallery() {
           Files are automatically converted to next-gen formats (WebP/AVIF for photos, H.264/WebM for videos) with perceptual quality compression to load ultra-fast.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start">
           {/* File Picker */}
           <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-emerald-500 transition bg-gray-50/50">
             <input
               type="file"
               id="gallery-file-input"
-              className="hidden"
+              className="sr-only peer"
               accept="image/*,video/*"
               onChange={handleFileChange}
               disabled={loading}
             />
             <label
               htmlFor="gallery-file-input"
-              className="cursor-pointer flex flex-col items-center justify-center"
+              className="cursor-pointer peer-focus-visible:outline-2 peer-focus-visible:outline-green-600 flex flex-col items-center justify-center"
             >
               <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-3">
                 <FiUploadCloud />
@@ -255,7 +255,7 @@ export default function Gallery() {
         </h3>
 
         {fetching ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="h-56 bg-gray-100 rounded-2xl animate-pulse" />
             ))}
@@ -265,7 +265,7 @@ export default function Gallery() {
             No gallery items found. Upload your first picture or video above!
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
             {gallery.map((item) => {
               const isVideo = item.type === "video";
               const optimizedUrl = getOptimizedMediaUrl(item.url, item.type, "thumbnail");
