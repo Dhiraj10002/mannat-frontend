@@ -90,12 +90,6 @@
   transition: background-color 150ms;
 }
 
-.site-header__donate svg {
-  display: none;
-  width: 0.875rem;
-  height: 0.875rem;
-}
-
 .site-header__donate:hover {
   background: #166534;
 }
@@ -210,10 +204,6 @@
     gap: 0.75rem;
   }
 
-  .site-header__donate svg {
-    display: block;
-  }
-
   .site-header__mobile-menu {
     padding-inline: 1.5rem;
   }
@@ -222,6 +212,52 @@
 @media (min-width: 1024px) {
   .site-header {
     --header-height: 5.5rem;
+  }
+
+  .site-header--home {
+    position: fixed;
+    inset-inline: 0;
+    border-bottom-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    transition: background-color 180ms, box-shadow 180ms;
+  }
+
+  .site-header--home.site-header--scrolled {
+    background: #18181b;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
+  }
+
+  .site-header__wordmark {
+    flex-direction: row;
+    gap: 0.3em;
+  }
+
+  .site-header__name,
+  .site-header__foundation {
+    color: #15803d;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .site-header--home :is(.site-header__name, .site-header__foundation) {
+    color: #22c55e;
+  }
+
+  .site-header--home .site-header__link {
+    color: #22c55e;
+  }
+
+  .site-header--home .site-header__link:hover {
+    background: rgb(255 255 255 / 6%);
+    color: #86efac;
+  }
+
+  .site-header--home :is(a, button):focus-visible {
+    outline-color: #86efac;
   }
 
   .site-header__desktop-links {
@@ -239,6 +275,8 @@
 
   .site-header__donate {
     padding-inline: 1.25rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
   }
 
   .site-header__toggle,
@@ -264,6 +302,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .site-header,
   .site-header * {
     transition: none;
   }

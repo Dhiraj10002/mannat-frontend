@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { FaBars, FaHeart, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../assets/images/logo.png";
 import "./Navbar.css";
 
@@ -18,9 +18,18 @@ const navLinkClass = ({ isActive }) =>
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 60);
   const headerRef = useRef(null);
   const toggleRef = useRef(null);
   const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 60);
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, [location]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -65,7 +74,10 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="site-header" ref={headerRef}>
+      <header
+        className={`site-header${isHome ? " site-header--home" : ""}${scrolled ? " site-header--scrolled" : ""}`}
+        ref={headerRef}
+      >
         <nav className="site-header__inner" aria-label="Main navigation">
           <Link
             to="/"
@@ -81,7 +93,7 @@ const Navbar = () => {
           </Link>
 
           <ul className="site-header__desktop-links">
-            {navigation.map(({ to, label }) => (
+            {navigation.filter(({ to }) => to !== "/").map(({ to, label }) => (
               <li key={to}>
                 <NavLink to={to} end={to === "/"} className={navLinkClass}>
                   {label}
@@ -96,7 +108,6 @@ const Navbar = () => {
               className="site-header__donate"
               onClick={() => setMenuOpen(false)}
             >
-              <FaHeart aria-hidden="true" />
               <span>Donate</span>
             </NavLink>
             <button
