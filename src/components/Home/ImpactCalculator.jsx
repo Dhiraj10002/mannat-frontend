@@ -44,21 +44,21 @@ const ImpactCalculator = () => {
   const animalsAided = Math.max(1, Math.floor(amount / 500));
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-green-50/40 to-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section aria-labelledby="impact-heading" className="py-14 sm:py-20 bg-gradient-to-b from-white via-green-50/40 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-bold uppercase tracking-wider mb-4">
             <FaChartPie />
             <span>Interactive Simulator</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+          <h2 id="impact-heading" className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
             See Your <span className="text-green-700">Real-World Impact</span>
           </h2>
           <p className="mt-4 text-gray-600 text-base md:text-lg leading-relaxed">
@@ -68,14 +68,14 @@ const ImpactCalculator = () => {
         </motion.div>
 
         {/* Calculator Main Grid */}
-        <div className="grid lg:grid-cols-12 gap-10 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-6 sm:gap-10 items-stretch">
           {/* Left Column: Interactive Slider & Control (7 Cols) */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 bg-white rounded-3xl p-8 shadow-xl border border-green-100 flex flex-col justify-between"
+            className="lg:col-span-7 min-w-0 bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-green-100 flex flex-col justify-between"
           >
             <div>
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -95,7 +95,8 @@ const ImpactCalculator = () => {
                       key={amt}
                       type="button"
                       onClick={() => setAmount(amt)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                      aria-pressed={amount === amt}
+                      className={`min-h-11 px-3 py-2 rounded-lg text-xs font-bold transition ${
                         amount === amt
                           ? "bg-green-700 text-white shadow-md"
                           : "bg-gray-100 text-gray-700 hover:bg-green-100 hover:text-green-800"
@@ -111,6 +112,8 @@ const ImpactCalculator = () => {
               <div className="py-4">
                 <input
                   type="range"
+                  aria-label="Contribution amount"
+                  aria-valuetext={`₹${amount.toLocaleString("en-IN")}`}
                   min="500"
                   max="25000"
                   step="250"
@@ -118,17 +121,17 @@ const ImpactCalculator = () => {
                   onChange={(e) => setAmount(Number(e.target.value))}
                   className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600 transition"
                 />
-                <div className="flex justify-between text-xs text-gray-400 font-semibold mt-2">
+                <div className="flex justify-between gap-2 text-[0.6875rem] sm:text-xs text-gray-500 font-semibold mt-2">
                   <span>₹500 (Minimum)</span>
-                  <span>₹12,500</span>
+                  <span className="hidden sm:inline">₹12,500</span>
                   <span>₹25,000+</span>
                 </div>
               </div>
 
               {/* Live Impact Metric Cards */}
-              <div className="grid grid-cols-2 gap-4 mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-6">
                 {/* Metric 1 */}
-                <div className="p-4 rounded-2xl bg-green-50/70 border border-green-100 flex items-start gap-3">
+                <div className="p-4 rounded-2xl bg-green-50/70 border border-green-100 flex items-start gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-xl bg-green-600 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
                     <FaBookOpen />
                   </div>
@@ -136,14 +139,14 @@ const ImpactCalculator = () => {
                     <div className="text-2xl font-black text-gray-900">
                       {students}
                     </div>
-                    <p className="text-xs font-medium text-gray-600 leading-snug">
+                    <p className="text-sm font-medium text-gray-600 leading-relaxed">
                       Students provided study kits & library access
                     </p>
                   </div>
                 </div>
 
                 {/* Metric 2 */}
-                <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-100 flex items-start gap-3">
+                <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-100 flex items-start gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
                     <FaUtensils />
                   </div>
@@ -151,14 +154,14 @@ const ImpactCalculator = () => {
                     <div className="text-2xl font-black text-gray-900">
                       {meals}
                     </div>
-                    <p className="text-xs font-medium text-gray-600 leading-snug">
+                    <p className="text-sm font-medium text-gray-600 leading-relaxed">
                       Warm, nutritious meals served to underserved families
                     </p>
                   </div>
                 </div>
 
                 {/* Metric 3 */}
-                <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 flex items-start gap-3">
+                <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100 flex items-start gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
                     <FaUserNurse />
                   </div>
@@ -166,14 +169,14 @@ const ImpactCalculator = () => {
                     <div className="text-2xl font-black text-gray-900">
                       {seniorCheckups}
                     </div>
-                    <p className="text-xs font-medium text-gray-600 leading-snug">
+                    <p className="text-sm font-medium text-gray-600 leading-relaxed">
                       Senior citizen mental well-being & healthcare checkups
                     </p>
                   </div>
                 </div>
 
                 {/* Metric 4 */}
-                <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 flex items-start gap-3">
+                <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 flex items-start gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
                     <FaPaw />
                   </div>
@@ -181,7 +184,7 @@ const ImpactCalculator = () => {
                     <div className="text-2xl font-black text-gray-900">
                       {animalsAided}
                     </div>
-                    <p className="text-xs font-medium text-gray-600 leading-snug">
+                    <p className="text-sm font-medium text-gray-600 leading-relaxed">
                       Rescued animals fed, sheltered, and medically treated
                     </p>
                   </div>
@@ -190,28 +193,28 @@ const ImpactCalculator = () => {
             </div>
 
             {/* Direct Donate Button with amount */}
-            <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs text-gray-500 flex items-center gap-1.5 font-medium">
-                <FaShieldAlt className="text-green-600" />
+            <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-4">
+              <span className="min-w-0 text-xs text-gray-500 flex items-start gap-2 font-medium leading-relaxed">
+                <FaShieldAlt className="text-green-600 shrink-0 mt-0.5" />
                 <span>Verified 100% direct community transfer</span>
               </span>
               <Link
                 to="/donate"
-                className="w-full sm:w-auto px-8 py-3.5 bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold shadow-lg transition flex items-center justify-center gap-2 group"
+                className="w-full xl:w-auto shrink-0 px-4 sm:px-6 py-3.5 text-sm sm:text-base bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold shadow-lg transition flex items-center justify-center gap-2 group"
               >
                 <span>Contribute ₹{amount.toLocaleString("en-IN")} Now</span>
-                <span className="transition-transform group-hover:translate-x-1">→</span>
+                <span aria-hidden="true" className="shrink-0 transition-transform group-hover:translate-x-1">→</span>
               </Link>
             </div>
           </motion.div>
 
           {/* Right Column: Fund Transparency Breakdown (5 Cols) */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 bg-white rounded-3xl p-8 shadow-xl border border-gray-100 flex flex-col justify-between"
+            className="lg:col-span-5 min-w-0 bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-gray-100 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-2.5 mb-3">
@@ -250,14 +253,14 @@ const ImpactCalculator = () => {
                     key={idx}
                     className="p-3.5 rounded-2xl bg-gray-50 border border-gray-100 hover:border-green-200 transition"
                   >
-                    <div className="flex justify-between items-center mb-1">
-                      <div className="flex items-center gap-2">
-                        <span className={`w-3 h-3 rounded-full ${item.color}`} />
+                    <div className="flex justify-between items-start gap-3 mb-1">
+                      <div className="flex min-w-0 items-start gap-2">
+                        <span className={`w-3 h-3 shrink-0 mt-1 rounded-full ${item.color}`} />
                         <span className="font-bold text-gray-900 text-sm">
                           {item.category}
                         </span>
                       </div>
-                      <span className="text-base font-extrabold text-green-700">
+                      <span className="shrink-0 text-base font-extrabold text-green-700">
                         {item.percentage}%
                       </span>
                     </div>
